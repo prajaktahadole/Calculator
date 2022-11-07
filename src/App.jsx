@@ -17,24 +17,27 @@ function App() {
   return (
     <div className="App">
       <div className='calculator'>
-        <div className='display'></div>
+        <div className='display'>
+          <span>0</span>
+        </div>
         
-        <div >
+      <div className='keypad'>
+        <div className='left'>
                   <button>AC</button>
-                  <button>+/-</button>
+                  <button>+-</button>
                   <button>%</button>
                   {Numbers()}
                   <button>.</button>
         </div>
 
-        <div>
-                  <button>/</button>
-                  <button>*</button>
+        <div className='right'> 
+                  <button>÷</button>
+                  <button>x</button>
                   <button>+</button>
                   <button>-</button>
-                  <button>=</button>
+                  <button className='equal'>=</button>
         </div>
-                
+        </div>       
 
       </div>
     </div>
