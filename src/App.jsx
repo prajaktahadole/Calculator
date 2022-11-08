@@ -6,11 +6,20 @@ function App() {
   const [cal , setCal] = useState("");
   const [result, setResult] = useState("");
 
-  const operators = ['÷' , 'x' , '+' , '-', '+-', '%' , '.']
+  const operators = ['/' , '*' , '+' , '-', '%' , '.']
 
+  
   const UpdateCal = value =>{
+    if(
+      operators.includes(value) && cal === ""   ||  // check last value is operators and cal has nothing
+      operators.includes(value) && operators.includes(cal.slice(-1)  // check more than one operator use in sequence
+      ) 
+    ) 
+    return;
     setCal(cal+value )
   }
+
+
 
   const Numbers = () =>{
     const numbs = [];
@@ -26,6 +35,36 @@ function App() {
   }
 
 
+
+  const Equalto = () =>{
+    setCal(eval(cal).toString());
+  }
+
+
+  const Allclear = () =>{
+    if(cal == ''){
+      return;
+    }
+    else{
+      const value = "";
+      setCal(value)
+    }
+  }
+
+
+  const Clear = () =>{
+    if(cal == ''){
+      return;
+    }
+    else{
+      const value = cal.slice(0, -1);
+      setCal(value)
+    }
+
+  }
+
+
+
   return (
     <div className="App">
       <div className='calculator'>
@@ -36,19 +75,19 @@ function App() {
         
       <div className='keypad'>
         <div className='left'>
-                  <button>AC</button>
-                  <button onClick={() => UpdateCal('+-')}>+-</button>
+                  <button onClick={Allclear}>AC</button>
+                  <button onClick={Clear}>C</button>
                   <button onClick={() => UpdateCal('%')}>%</button>
                   {Numbers()}
                   <button onClick={() => UpdateCal('.')}>.</button>
         </div>
 
         <div className='right'> 
-                  <button onClick={() => UpdateCal('÷')}>÷</button>
-                  <button onClick={() => UpdateCal('x')}>x</button>
+                  <button onClick={() => UpdateCal('/')}>÷</button>
+                  <button onClick={() => UpdateCal('*')}>x</button>
                   <button onClick={() => UpdateCal('+')}>+</button>
                   <button onClick={() => UpdateCal('-')}>-</button>
-                  <button className='equal'>=</button>
+                  <button onClick={Equalto} className='equal'>=</button>
         </div>
         </div>       
 
